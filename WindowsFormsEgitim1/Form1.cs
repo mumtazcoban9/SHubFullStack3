@@ -19,7 +19,7 @@ namespace WindowsFormsEgitim1
 
         private void Egitim_Load(object sender, EventArgs e)
         {
-            // bu metot form açılırken çalışır
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,6 +37,24 @@ namespace WindowsFormsEgitim1
             { 
                 button1.Enabled = false;
             }
+        }
+
+        private void giris_Click(object sender, EventArgs e)
+        {
+            if (kullaniciadi.Text == "Admin" && sifre.Text == "sifre")
+            {
+                label1.Text = "Hoşgeldin Emmi";
+            }
+            else
+            {
+                MessageBox.Show("Giriş Başarısız"); // kısayolu mbox tab tab ekrana mesaj vermemizi sağlar
+            }
+
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            label1.Font = new Font(comboBox1.SelectedValue.ToString(),(float)numericUpDown1.Value);
         }
     }
 }
