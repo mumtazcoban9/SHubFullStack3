@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtKullaniciAdi = new System.Windows.Forms.TextBox();
-            this.txtSifre = new System.Windows.Forms.TextBox();
             this.btnGiris = new System.Windows.Forms.Button();
+            this.txtSifre = new System.Windows.Forms.TextBox();
+            this.txtKullaniciAdi = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,14 +51,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kullanıcı Bilgileri";
             // 
-            // label1
+            // btnGiris
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Kullanıcı Adı/e-Mail";
+            this.btnGiris.Location = new System.Drawing.Point(87, 95);
+            this.btnGiris.Name = "btnGiris";
+            this.btnGiris.Size = new System.Drawing.Size(75, 23);
+            this.btnGiris.TabIndex = 2;
+            this.btnGiris.Text = "Giriş";
+            this.btnGiris.UseVisualStyleBackColor = true;
+            // 
+            // txtSifre
+            // 
+            this.txtSifre.Location = new System.Drawing.Point(131, 58);
+            this.txtSifre.Name = "txtSifre";
+            this.txtSifre.Size = new System.Drawing.Size(100, 22);
+            this.txtSifre.TabIndex = 1;
+            // 
+            // txtKullaniciAdi
+            // 
+            this.txtKullaniciAdi.Location = new System.Drawing.Point(131, 22);
+            this.txtKullaniciAdi.Name = "txtKullaniciAdi";
+            this.txtKullaniciAdi.Size = new System.Drawing.Size(100, 22);
+            this.txtKullaniciAdi.TabIndex = 1;
             // 
             // label2
             // 
@@ -69,28 +83,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Şifre";
             // 
-            // txtKullaniciAdi
+            // label1
             // 
-            this.txtKullaniciAdi.Location = new System.Drawing.Point(131, 22);
-            this.txtKullaniciAdi.Name = "txtKullaniciAdi";
-            this.txtKullaniciAdi.Size = new System.Drawing.Size(100, 22);
-            this.txtKullaniciAdi.TabIndex = 1;
-            // 
-            // txtSifre
-            // 
-            this.txtSifre.Location = new System.Drawing.Point(131, 58);
-            this.txtSifre.Name = "txtSifre";
-            this.txtSifre.Size = new System.Drawing.Size(100, 22);
-            this.txtSifre.TabIndex = 1;
-            // 
-            // btnGiris
-            // 
-            this.btnGiris.Location = new System.Drawing.Point(87, 95);
-            this.btnGiris.Name = "btnGiris";
-            this.btnGiris.Size = new System.Drawing.Size(75, 23);
-            this.btnGiris.TabIndex = 2;
-            this.btnGiris.Text = "Giriş";
-            this.btnGiris.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Kullanıcı Adı/e-Mail";
             // 
             // Form1
             // 

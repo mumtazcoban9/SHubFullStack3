@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,40 +10,47 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAppAdoNetCRUD
 {
-    public partial class KategoriYonetimi : Form
+    public partial class KullaniciYonetimi : Form
     {
-        public KategoriYonetimi()
+        public KullaniciYonetimi()
         {
             InitializeComponent();
         }
-        CategoryDAL dAL = new CategoryDAL();
-        private void KategoriYonetimi_Load(object sender, EventArgs e)
+        KullaniciDAL dAL = new KullaniciDAL();
+        private void KullaniciYonetimi_Load(object sender, EventArgs e)
         {
             Yukle();
         }
         void Yukle()
         {
-            dgvKategoriler.DataSource = dAL.GetDataTable("select * from categories");
+            dgvKullanicilar.DataSource = dAL.GetDataTable("select * from users");
             btnEkle.Enabled = true;
             btnGuncelle.Enabled = false;
             btnSil.Enabled = false;
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtKategoriAdi.Text))
+            if (string.IsNullOrWhiteSpace(txtAdi.Text))
             {
-                MessageBox.Show("Kategori Adı Boş Geçilemez!");
+                MessageBox.Show("Kullanıcı Adı Boş Geçilemez!");
                 return;
             }
-            var kategori = new Category
+            var kullanici = new User
             {
                 CreateDate = DateTime.Now,
-                Name = txtKategoriAdi.Text,
-                Description = txtAciklama.Text,
+                Name = txtAdi.Text,
+                Surname = txtSoyadi.Text,
                 IsActive = cbDurum.Checked,
+                Email = txtEmail.Text, 
+                Password = txtSifre.Text
             };
-            var sonuc = dAL.Add(kategori);
+            var sonuc = dAL.Add(kullanici);
             if (sonuc > 0)
             {
                 Yukle();
@@ -55,35 +60,40 @@ namespace WindowsFormsAppAdoNetCRUD
             {
                 MessageBox.Show("Kayıt Başarısız");
             }
+
         }
 
-        private void dgvKategoriler_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvKullanicilar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtKategoriAdi.Text = dgvKategoriler.CurrentRow.Cells[1].ToString();
-            txtAciklama.Text = dgvKategoriler.CurrentRow.Cells[2].ToString();
-            cbDurum.Checked = (bool)dgvKategoriler.CurrentRow.Cells[3].Value;
+            txtAdi.Text = dgvKullanicilar.CurrentRow.Cells[1].ToString();
+            txtSoyadi.Text = dgvKullanicilar.CurrentRow.Cells[2].ToString();
+            txtSifre.Text = dgvKullanicilar.CurrentRow.Cells[3].ToString();
+            txtEmail.Text = dgvKullanicilar.CurrentRow.Cells[4].ToString();
+            cbDurum.Checked = (bool)dgvKullanicilar.CurrentRow.Cells[5].Value;
 
             btnEkle.Enabled = false;
             btnGuncelle.Enabled = true;
             btnSil.Enabled = true;
         }
 
-        private void btnGuncelle_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtKategoriAdi.Text))
+            if (string.IsNullOrWhiteSpace(txtAdi.Text))
             {
-                MessageBox.Show("Kategori Adı Boş Geçilemez!");
+                MessageBox.Show("Kullanıcı Adı Boş Geçilemez!");
                 return;
             }
-            var kategori = new Category
+            var kullanici = new User
             {
-                Id = (int)dgvKategoriler.CurrentRow.Cells[0].Value,
+                Id = (int)dgvKullanicilar.CurrentRow.Cells[0].Value,
                 CreateDate = DateTime.Now,
-                Name = txtKategoriAdi.Text,
-                Description = txtAciklama.Text,
+                Name = txtAdi.Text,
+                Surname = txtSoyadi.Text,
                 IsActive = cbDurum.Checked,
+                Email = txtEmail.Text,
+                Password = txtSifre.Text
             };
-            var sonuc = dAL.Update(kategori); // Kaydı Güncelle
+            var sonuc = dAL.Update(kullanici);
             if (sonuc > 0)
             {
                 Yukle();
@@ -97,11 +107,11 @@ namespace WindowsFormsAppAdoNetCRUD
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            var kategori = new Category
+            var kayit = new User
             {
-                Id = (int)dgvKategoriler.CurrentRow.Cells[0].Value
+                Id = (int)dgvKullanicilar.CurrentRow.Cells[0].Value
             };
-            var sonuc = dAL.Delete(kategori);
+            var sonuc = dAL.Delete(kayit);
             if (sonuc > 0)
             {
                 Yukle();
@@ -114,3 +124,4 @@ namespace WindowsFormsAppAdoNetCRUD
         }
     }
 }
+
