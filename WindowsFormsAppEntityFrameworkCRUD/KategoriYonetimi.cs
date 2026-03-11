@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsAppAdoNetCRUD;
 
-namespace WindowsFormsAppAdoNetCRUD
+namespace WindowsFormsAppEntityFrameworkCRUD
 {
     public partial class KategoriYonetimi : Form
     {
@@ -18,24 +17,27 @@ namespace WindowsFormsAppAdoNetCRUD
         {
             InitializeComponent();
         }
-        CategoryDAL dAL = new CategoryDAL();
-        private void KategoriYonetimi_Load(object sender, EventArgs e)
-        {
-            Yukle();
-        }
+        DatabaseContext context = new DatabaseContext();
         void Yukle()
         {
-            dgvKategoriler.DataSource = dAL.GetDataTable("select * from categories");
+            dgvKategoriler.DataSource = context.Categories.ToList();
             btnEkle.Enabled = true;
             btnGuncelle.Enabled = false;
             btnSil.Enabled = false;
+            txtAciklama.Text = string.Empty;
+            txtKategoriAdi.Text = string.Empty;
+            cbDurum.Checked = false;
+        }
+        private void KategoriYonetimi_Load(object sender, EventArgs e)
+        {
+            Yukle();
         }
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtKategoriAdi.Text))
             {
-                MessageBox.Show("Kategori Adı Boş Geçilemez!");
+                MessageBox.Show("KAtegori Adı Boş Geçilemez");
                 return;
             }
             var kategori = new Category
@@ -45,7 +47,9 @@ namespace WindowsFormsAppAdoNetCRUD
                 Description = txtAciklama.Text,
                 IsActive = cbDurum.Checked,
             };
-            var sonuc = dAL.Add(kategori);
+           context.Categories.Add
+(kategori);
+            var sonuc = context .SaveChanges();
             if (sonuc > 0)
             {
                 Yukle();
@@ -59,31 +63,29 @@ namespace WindowsFormsAppAdoNetCRUD
 
         private void dgvKategoriler_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             txtKategoriAdi.Text = dgvKategoriler.CurrentRow.Cells[1].ToString();
             txtAciklama.Text = dgvKategoriler.CurrentRow.Cells[2].ToString();
             cbDurum.Checked = (bool)dgvKategoriler.CurrentRow.Cells[3].Value;
 
             btnEkle.Enabled = false;
             btnGuncelle.Enabled = true;
-            btnSil.Enabled = true;
+            btnSil.Enabled = true;       
         }
 
-        private void btnGuncelle_Click(object sender, EventArgs e)
+        private void btnGuncellee_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtKategoriAdi.Text))
             {
-                MessageBox.Show("Kategori Adı Boş Geçilemez!");
+                MessageBox.Show("KAtegori Adı Boş Geçilemez");
                 return;
             }
-            var kategori = new Category
-            {
-                Id = (int)dgvKategoriler.CurrentRow.Cells[0].Value,
-                CreateDate = DateTime.Now,
-                Name = txtKategoriAdi.Text,
-                Description = txtAciklama.Text,
-                IsActive = cbDurum.Checked,
-            };
-            var sonuc = dAL.Update(kategori); // Kaydı Güncelle
+            var id = (int)dgvKategoriler.CurrentRow.Cells[0].Value;
+            var kayit = context.Categories.Find(id);
+            kayit.Name = txtKategoriAdi.Text;
+            kayit.Description = txtAciklama.Text;
+            kayit.IsActive = cbDurum.Checked;
+            var sonuc = context.SaveChanges();
             if (sonuc > 0)
             {
                 Yukle();
@@ -91,31 +93,25 @@ namespace WindowsFormsAppAdoNetCRUD
             }
             else
             {
-                MessageBox.Show("Kayıt Başarısız");
+                MessageBox.Show("Kayıt Başarasız");
             }
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            var kategori = new Category
-            {
-                Id = (int)dgvKategoriler.CurrentRow.Cells[0].Value
-            };
-            var sonuc = dAL.Delete(kategori);
+            var id = (int)dgvKategoriler.CurrentRow.Cells["Id"].Value;
+            var kayit = context.Categories.Find(id);
+            context.Categories.Remove(kayit);
+            var sonuc = context.SaveChanges();
             if (sonuc > 0)
             {
                 Yukle();
-                MessageBox.Show("Kayıt Silme Başarılı");
+                MessageBox.Show("Kayıt Başarılı");
             }
             else
             {
-                MessageBox.Show("Kayıt Silme Başarısız");
+                MessageBox.Show("Kayıt Başarasız");
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
