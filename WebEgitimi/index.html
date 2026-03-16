@@ -210,7 +210,7 @@
         <br />
         yorum satırını açmak için ctrl tuşuna basılı tutarken k+u tuşları yorum satırını açar
     </p>
-     <!--Burası yorum alanı kod bitişi--> 
+    <!--Burası yorum alanı kod bitişi-->
 
     <h3>Fieldset Elementi</h3>
     <fieldset>
@@ -234,7 +234,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit"  value="Giriş Yap" />
+                        <input type="submit" value="Giriş Yap" />
                     </td>
                 </tr>
             </table>
@@ -266,31 +266,71 @@
             <tr>
                 <td>Ürün Resmi</td>
                 <td>
-                    <input type="file" name="urunresmi"  />
+                    <input type="file" name="urunresmi" />
                 </td>
             </tr>
             <tr>
                 <td>Ürün Stok</td>
-                <td><input type="number" name="stok"  /></td>
+                <td><input type="number" name="stok" /></td>
             </tr>
             <tr>
                 <td>Ürün Durum</td>
-                <td><input type="checkbox" name="cbDurum"  /></td>
+                <td><input type="checkbox" name="cbDurum" /></td>
             </tr>
             <tr>
                 <td>Ürün Rengi</td>
-                <td><input type="color" name="cbRenk"  /></td>
+                <td><input type="color" name="cbRenk" /></td>
             </tr>
             <tr>
                 <td>Ürün Üretim Tarihi</td>
-                <td><input type="date" name="dtTaih"  /></td>
+                <td><input type="date" name="dtTarih" /></td>
             </tr>
-                <td>
-                    <input type="submit" value="Kaydet" />
-                </td>
+            <td>
+                <input type="submit" value="Kaydet" />
+            </td>
             </tr>
         </table>
     </form>
 
+    <hr />
+    <h2>Semantik Html5 Elemnetleri</h2>
+    <p>
+        Html ye sonradan eklenen ve tasarımları daha anlaşılabilir hale getirmeyi hedefleyen elementlerdir.
+    </p>
+    <header>
+        Web sayfalarının en üst bölümü bu elemnt içinde yer alır.
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Anasayfa</a>
+                </li>
+                <li>
+                    <a href="#">Hakkımızda</a>
+                </li>
+                <li>
+                    <a href="#">İletşim</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        tüm body içeriğinin kapsayıcısı
+    </main>
+    <section>
+        section web sayfalarımızın ana gövdesini tutmak veya bölümler oluşturmak için kullanılabilir.
+        <aside>
+            <h3>Yan Menü</h3>
+        </aside>
+    </section>
+    <article>
+        article elementi bilgi verme amaçlı haber makale vb gibi içerik kapsayıcısı olarak kullanılabilir
+    </article>
+    <figure>
+        <img src="Resimler/323a4fea0f73736d848ad3387b15d2da.jpg" alt="" />
+        <figcaption>Açıklama Metni</figcaption>
+    </figure>
+    <footer>
+        footer elementi ise web sayfalarının en alt ksımını çerçevelemek için kullanılır
+    </footer>
 </body>
 </html>
